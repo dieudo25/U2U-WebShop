@@ -9,7 +9,8 @@ namespace WebShop.Infra
         public WebShopDbContext CreateDbContext(string[] args)
         {
             // This project should use the same user secrets key as the main .csproj !!!
-            ConfigurationBuilder? cb = new ConfigurationBuilder(); cb.AddUserSecrets<WebShopDbContext>(); 
+            ConfigurationBuilder? cb = new ConfigurationBuilder(); 
+            cb.AddUserSecrets<WebShopDbContext>(); 
             IConfigurationRoot configuration = cb.Build(); 
             string connectionString = configuration.GetConnectionString("WebShopDb"); 
             DbContextOptionsBuilder<WebShopDbContext>? builder = new DbContextOptionsBuilder<WebShopDbContext>(); 

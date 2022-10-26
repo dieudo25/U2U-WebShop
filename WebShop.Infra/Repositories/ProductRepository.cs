@@ -14,10 +14,10 @@ namespace WebShop.Infra.Repositories
             {
                 var products = new List<Product>
                 {
-                    new Product("PS5", "Amazon", "imgs/shop/thumbnail-2.jpg", 500, 4, 0, ProductCategory.Vege),
-                    new Product("Xbox", "Amazon", "imgs/shop/thumbnail-2.jpg", 400, 4, 20, ProductCategory.Snack),
-                    new Product("Switch", "Amazon", "imgs/shop/thumbnail-2.jpg", 300, 4, 0, ProductCategory.Meats),
-                    new Product("Dell XPS 15", "Amazon", "imgs/shop/thumbnail-2.jpg", 1500, 4, 50, ProductCategory.Meats)
+                    new Product(1, "PS5", "Amazon", "imgs/shop/thumbnail-2.jpg", 500, 4, 0, ProductCategory.Vege),
+                    new Product(2, "Xbox", "Amazon", "imgs/shop/thumbnail-2.jpg", 400, 4, 20, ProductCategory.Snack),
+                    new Product(3,"Switch", "Amazon", "imgs/shop/thumbnail-2.jpg", 300, 4, 0, ProductCategory.Meats),
+                    new Product(4,"Dell XPS 15", "Amazon", "imgs/shop/thumbnail-2.jpg", 1500, 4, 50, ProductCategory.Meats)
                 };
 
                 context.Products.AddRange(products);
