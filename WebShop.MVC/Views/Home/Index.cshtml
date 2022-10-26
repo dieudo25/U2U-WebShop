@@ -1,0 +1,127 @@
+﻿@model WebShop.MVC.ViewModels.Home.HomeIndexVM
+
+@using WebShop.Core.Services;
+
+@inject IBadgeService BadgeService
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="product-tabs section-padding position-relative">
+    <div class="container mb-30">
+        <div class="row flex-row-reverse">
+            <div class="col-lg-4-5">
+                <section class="product-tabs section-padding position-relative">
+                    <div class="section-title style-2">
+                        <h3>Popular Products</h3>
+                        <ul class="nav nav-tabs links" id="myTab" role="tablist">
+                            @foreach (var cat in Model.Categories)
+                            {
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="nav-tab-@cat" data-bs-toggle="tab" data-bs-target="#tab-@cat" type="button" role="tab" aria-controls="tab-@cat" aria-selected="true">@cat</button>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!--End nav-tabs-->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
+                            <div class="row product-grid-4">
+                                @foreach (var product in Model.Products)
+                                {
+                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                        <div class="product-cart-wrap mb-30">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="shop-product-right.html">
+                                                        <img class="default-img" src="/@product.Image" alt="" />
+                                                        <img class="hover-img" src="/@product.Image" alt="" />
+                                                    </a>
+                                                </div>
+                                                <div class="product-action-1">
+                                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class=@BadgeService.GetInfo(product).Item2>
+                                                        @BadgeService.GetInfo(product).Item1
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <div class="product-category">
+                                                    <a href="shop-grid-right.html">@product.Category</a>
+                                                </div>
+                                                <h2><a href="shop-product-right.html">@product.Name</a></h2>
+                                                <div class="product-rate-cover">
+                                                    <div class="product-rate d-inline-block">
+                                                        <div class="product-rating" style="width:(@product.Rating * 20%)%"></div>
+                                                    </div>
+                                                    <span class="font-small ml-5 text-muted"> (@product.Rating)</span>
+                                                </div>
+                                                <div>
+                                                    <span class="font-small text-muted">By <a href="vendor-details-1.html">@product.Seller</a></span>
+                                                </div>
+                                                <div class="product-card-bottom">
+                                                    <div class="product-price">
+                                                        <span>@product.UnitPrice</span>
+                                                        <span class="old-price">@product.UnitPrice</span>
+                                                    </div>
+                                                    <div class="add-cart">
+                                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                }
+                                <!--end product card-->
+                            </div>
+                            <!--End product-grid-4-->
+                        </div>
+                            <!--En tab All-->
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
+                <div class="sidebar-widget widget-category-2 mb-30">
+                    <h5 class="section-title style-1 mb-30">Category</h5>
+                    <ul>
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <li>
+                                <a asp-action="Index" asp-route-categoryname=@cat>
+                                    <img src="/imgs/theme/icons/category-1.svg" alt="" />@cat
+                                    <span class="count">
+                                        @if (cat.ToString() == "All")
+                                        {
+                                            @Model.Products.Count()
+                                        }
+                                        @Model.Products.Where(p => p.Category == cat).Count()
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                           
+                    </ul>
+                </div>
+                <!-- Fillter By Price -->
+                <div class="sidebar-widget price_range range mb-30">
+                    <h5 class="section-title style-1 mb-30">Fill by price</h5>
+                    <div class="price-filter">
+                        <div class="price-filter-inner">
+                            <div id="slider-range" class="mb-20"></div>
+                            <div class="d-flex justify-content-between">
+                                <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong></div>
+                                <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
+                </div>
+            </div>
+        </div>
+     </div>
+</section>
