@@ -9,14 +9,14 @@ namespace WebShop.MVC.Services
         {
             (string, string) badge = ("","");
 
-            if ((DateTime.Now - product.CreationDate).Days < 30)
+            if ((DateTime.Now - product.CreatedAt).Days < 30)
             {
                 badge = ("New", "new");
             }
 
             if (product.Rating >= 4)
             {
-                badge = ("Hot", "sale");
+                badge = ("Hot", "hot");
             }
 
             if(product.Discount != 0)

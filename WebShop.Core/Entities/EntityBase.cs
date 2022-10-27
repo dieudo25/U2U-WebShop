@@ -2,6 +2,7 @@
 
 public class EntityBase 
 { 
-    public int Id { get; } 
-    public EntityBase(int id) => Id = id; 
+    public int Id { get; set; }
+
+    public EntityBase(int id) : base() => Id = id; 
 }

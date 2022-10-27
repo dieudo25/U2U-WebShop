@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using WebShop.Core.Entities;
 
 namespace WebShop.Core.Repositories
@@ -20,3 +20,4 @@ namespace WebShop.Core.Repositories
         }
     }
 }
+*/

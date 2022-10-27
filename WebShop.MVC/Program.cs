@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using WebShop.Core.Repositories;
 using WebShop.Core.Services;
+using WebShop.Infra;
 using WebShop.Infra.Repositories;
 using WebShop.MVC.Services;
 
@@ -18,6 +20,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IBadgeService, BadgeService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddDbContext<WebShopDbContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDb"))
+);
 
 
 var app = builder.Build();

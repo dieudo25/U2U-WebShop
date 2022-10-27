@@ -4,7 +4,7 @@
     {
         public Product(int id) : base(id) {}
 
-        public Product(int id, string name, string seller, string image, decimal unitPrice, int rating, int discount, ProductCategory category) : base(id)
+        public Product(int id, string name, string seller, string image, decimal unitPrice, int rating, int discount, ProductCategory category) : this(id)
         {
             Name = name;
             Seller = seller;
@@ -13,7 +13,7 @@
             Rating = rating;
             Discount = discount;
             Category = category;
-            CreationDate = DateTime.Now;
+            CreatedAt = DateTime.Now;
         }
 
         public string? Name { get; set; }
@@ -24,7 +24,7 @@
 
         public ProductCategory Category { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
@@ -34,7 +34,7 @@
             get { return unitPrice; }
             set 
             { 
-                if(value < 0)
+                if(value >= 0)
                 {
                     unitPrice = value;
                 }
@@ -70,6 +70,11 @@
                     discount = 0;
                 }
             }
+        }
+
+        public int GetRatingByHundred()
+        {
+            return Rating * 20;
         }
     }
 }
